@@ -34,7 +34,9 @@ class PostsController extends Controller
     {
         $this-> validate($request, [
             'titulo' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'category' => 'required',
+            'contenido' => 'required'
 
         ]);
         //Validacion
@@ -44,7 +46,7 @@ class PostsController extends Controller
         $post->titulo = $request->get('titulo');
         $post->body =$request->get('body');
         $post->contenido =$request->get('contenido');
-        $post->fecha_publicacion = Carbon::parse($request->get('fecha_publicacion'));
+        $post->fecha_publicacion = $request->has('fecha_publicacion') ? Carbon::parse($request->get('fecha_publicacion')) : null;
         $post->category_id =$request->get('category');
         
         $post->save();
